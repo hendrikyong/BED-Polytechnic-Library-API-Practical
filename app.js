@@ -32,9 +32,15 @@ different functionalities
 
 const express = require("express");
 const sql = require("mssql");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const dbConfig = require("./dbConfig");
 const app = express();
 const port = 8080;
+
+//app.get("/books", )
+//app.put("/books/:bookId/availabilty", )
+//
 
 app.listen(port, async () => {
   try {

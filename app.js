@@ -32,15 +32,20 @@ different functionalities
 
 const express = require("express");
 const sql = require("mssql");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const bookController = require("./controllers/booksController");
+const bodyParser = require("body-parser");
 const dbConfig = require("./dbConfig");
 const app = express();
 const port = 8080;
 
-//app.get("/books", )
-//app.put("/books/:bookId/availabilty", )
-//
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/books", bookController.getAllBooks);
+app.get("/books/:id", bookController.getBookById);
+app.put("/books/:id/availabilty", bookController.updateBook);
+//app.post("/register", )
+//app.post("/login")
 
 app.listen(port, async () => {
   try {

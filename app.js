@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/books", bookController.getAllBooks);
 app.get("/books/:id", bookController.getBookById);
-app.put("/books/:id/availabilty", bookController.updateBook);
+app.put("/books/:id/availability", bookController.updateBook);
 //app.post("/register", )
 //app.post("/login")
 

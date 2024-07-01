@@ -33,6 +33,7 @@ different functionalities
 const express = require("express");
 const sql = require("mssql");
 const bookController = require("./controllers/booksController");
+const userController = require("./controllers/usersController");
 const bodyParser = require("body-parser");
 const dbConfig = require("./dbConfig");
 const app = express();
@@ -44,6 +45,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/books", bookController.getAllBooks);
 app.get("/books/:id", bookController.getBookById);
 app.put("/books/:id/availability", bookController.updateBook);
+app.get("/users", userController.getAllUsers);
 //app.post("/register", )
 //app.post("/login")
 

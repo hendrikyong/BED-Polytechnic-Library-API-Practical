@@ -31,6 +31,15 @@ CREATE TABLE Books (
   availability CHAR(1) CHECK (availability IN ('Y', 'N')) NOT NULL
 );
 
+INSERT INTO Users (username, passwordHash, role) 
+VALUES
+('john_doe', '5f4dcc3b5aa765d61d8327deb882cf99', 'member'),
+('eva_adams', '5f4dcc3b5aa765d61d8327deb882cf99', 'member'),
+('frank_wilson', '5f4dcc3b5aa765d61d8327deb882cf99', 'member'),
+('grace_hall', '5f4dcc3b5aa765d61d8327deb882cf99', 'member'),
+('harry_lewis', '5f4dcc3b5aa765d61d8327deb882cf99', 'librarian');
+
+
 INSERT INTO Books (title, author, availability) 
 VALUES
 ('To Kill a Mockingbird', 'Harper Lee', 'Y'),

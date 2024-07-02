@@ -25,6 +25,28 @@ class User {
       console.log("Error getting user", err);
     }
   }
+
+  static async getUserById(id) {
+    try {
+      const connection = await sql.connect(dbConfig);
+      const sqlQuery = `SELECT * FROM Users WHERE user_id = @id`;
+      const request = connection.request();
+      request.input("id", id);
+      const result = await request.query(sqlQuery);
+      connection.close();
+
+      return result.recordset[0]
+        ? new User(
+            result.recordset[0].user_id,
+            result.recordset[0].name,
+            result.recordset[0].passwordHash,
+            result.recordset[0].role
+          )
+        : null; // Handle user not found
+    } catch (err) {
+      console.log("Error reteriving user", err);
+    }
+  }
 }
 
 module.exports = User;

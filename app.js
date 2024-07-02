@@ -46,6 +46,7 @@ app.get("/books", bookController.getAllBooks);
 app.get("/books/:id", bookController.getBookById);
 app.put("/books/:id/availability", bookController.updateBook);
 app.get("/users", userController.getAllUsers);
+app.get("/users/:id", userController.getUserById);
 //app.post("/register", )
 //app.post("/login")
 

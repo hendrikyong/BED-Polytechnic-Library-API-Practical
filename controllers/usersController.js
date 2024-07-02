@@ -3,6 +3,7 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sql = require("mssql");
+require("dotenv").config();
 
 const getAllUsers = async (req, res) => {
   try {
@@ -80,7 +81,7 @@ const login = async (req, res) => {
 
     const request = connection.request();
     request.input("username", username);
-    const result = await request.query(sqlQuery);
+    await request.query(sqlQuery);
     connection.close();
 
     //console.log("result here", result);
@@ -96,7 +97,9 @@ const login = async (req, res) => {
       id: user.id,
       role: user.role,
     };
-    const token = jwt.sign(payload, "your_secret_key", { expiresIn: "3600s" }); // Expires in 1 hour
+    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
+      expiresIn: "3600s",
+    }); // Expires in 1 hour
 
     return res.status(200).json({ token });
   } catch (err) {

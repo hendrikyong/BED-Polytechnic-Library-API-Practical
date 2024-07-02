@@ -48,7 +48,7 @@ app.put("/books/:id/availability", bookController.updateBook);
 app.get("/users", userController.getAllUsers);
 app.get("/users/:username", userController.getUserByUsername);
 app.post("/register", userController.registerUser);
-//app.post("/login")
+app.post("/login", userController.login);
 
 app.listen(port, async () => {
   try {

@@ -26,8 +26,6 @@ different functionalities
     - Login to access the system (POST /login)
     - View a list of books and their availability (Y/N) (GET /books)
     - Update the availability of books (Y/N) (PUT /books/:bookId/availability)
-
-
 */
 
 const express = require("express");
@@ -36,6 +34,7 @@ const bookController = require("./controllers/booksController");
 const userController = require("./controllers/usersController");
 const bodyParser = require("body-parser");
 const dbConfig = require("./dbConfig");
+const verifyJWT = require("./middlewares/authValidate");
 const app = express();
 const port = 8080;
 
@@ -44,7 +43,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/books", bookController.getAllBooks);
 app.get("/books/:id", bookController.getBookById);
-app.put("/books/:id/availability", bookController.updateBook);
+app.put("/books/:id/availability", verifyJWT, bookController.updateBook);
 app.get("/users", userController.getAllUsers);
 app.get("/users/:username", userController.getUserByUsername);
 app.post("/register", userController.registerUser);

@@ -30,7 +30,7 @@ const getUserByUsername = async (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-  const { username, password, role } = req.body[0];
+  const { username, password, role } = req.body;
   try {
     //validation logic
     const existingUser = await User.getUserByUsername(username);
@@ -64,8 +64,9 @@ const registerUser = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { username, password } = req.body[0];
-  //console.log(username, password);
+  const { username, password } = req.body;
+  console.log(username);
+  console.log(password);
   // does get the username and
   //password that is in the json
 
@@ -101,7 +102,10 @@ const login = async (req, res) => {
       expiresIn: "3600s",
     }); // Expires in 1 hour
 
-    return res.status(200).json({ token });
+    // console.log(token);
+
+    //return res.status(200).json({ token });
+    return res.redirect("/getBooks.html");
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Internal server error" });

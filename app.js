@@ -35,11 +35,13 @@ const userController = require("./controllers/usersController");
 const bodyParser = require("body-parser");
 const dbConfig = require("./dbConfig");
 const verifyJWT = require("./middlewares/authValidate");
+const staticMiddleware = express.static("public");
 const app = express();
 const port = 8080;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(staticMiddleware);
 
 app.get("/books", bookController.getAllBooks);
 app.get("/books/:id", bookController.getBookById);

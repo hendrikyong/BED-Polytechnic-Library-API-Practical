@@ -1,7 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   const registerButton = document.getElementById("register");
   registerButton.addEventListener("click", function () {
-    window.location.href = "/public/register.html"; // Replace with the actual URL of your register page
+    window.location.href = "./register.html"; // Replace with the actual URL of your register page
   });
 
   const usernameInput = document.getElementById("username");

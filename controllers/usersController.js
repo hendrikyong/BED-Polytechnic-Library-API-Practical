@@ -54,10 +54,10 @@ const registerUser = async (req, res) => {
     connection.close();
 
     const newUser = { id: result.recordset[0].user_id, username };
-    //return res
-    //.status(200)
-    //.json({ message: "User successfully created", user: newUser });
-    return res.redirect("/successfullyCreated.html");
+    return res
+      .status(200)
+      .json({ message: "User successfully created", user: newUser });
+    //return res.redirect("/successfullyCreated.html");
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Internal server error" });
@@ -66,17 +66,15 @@ const registerUser = async (req, res) => {
 
 const login = async (req, res) => {
   const { username, password } = req.body;
-  console.log(username);
-  console.log(password);
-  // does get the username and
+  //does get the username and
   //password that is in the json
 
   try {
     // Validate user credentials
     const user = await User.getUserByUsername(username);
     if (!user) {
-      //return res.status(401).json({ message: "Invalid credentials" });
-      return res.redirect("/invalidCredentials.html");
+      return res.status(401).json({ message: "Invalid credentials" });
+      //return res.redirect("/invalidCredentials.html");
     }
 
     const connection = await sql.connect(dbConfig);
@@ -92,8 +90,8 @@ const login = async (req, res) => {
     // Compare password with hash
     const isMatch = await bcrypt.compare(password, user.passwordHash);
     if (!isMatch) {
-      //return res.status(401).json({ message: "Invalid credentials" });
-      return res.redirect("/invalidCredentials.html");
+      return res.status(401).json({ message: "Invalid credentials" });
+      //return res.redirect("/invalidCredentials.html");
     }
 
     // Generate JWT token
@@ -107,8 +105,8 @@ const login = async (req, res) => {
 
     // console.log(token);
 
-    //return res.status(200).json({ token });
-    return res.redirect("/getBooks.html");
+    return res.status(200).json({ token });
+    //return res.redirect("/getBooks.html");
   } catch (err) {
     console.error(err);
     return res.redirect("/internalServerError.html");

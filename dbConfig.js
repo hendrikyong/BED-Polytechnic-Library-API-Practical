@@ -1,13 +1,16 @@
 require("dotenv").config();
 
-module.exports = {
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  server: process.env.SERVER,
-  database: process.env.DATABASE,
-  trustServerCertificate: process.env.TRUSTSERVERCERTIFICATE === "true",
+const config = {
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_DATABASE,
   options: {
-    port: parseInt(process.env.PORT) || 1433,
+    encrypt: process.env.TRUSTSERVERCERTIFICATE === "true", // true for Azure connections
+    trustServerCertificate: process.env.TRUSTSERVERCERTIFICATE === "true", // true for local dev/self-signed certs
+    port: parseInt(process.env.DB_PORT) || 1433,
     connectionTimeout: parseInt(process.env.CONNECTIONTIMEOUT) || 60000,
   },
 };
+
+module.exports = config;

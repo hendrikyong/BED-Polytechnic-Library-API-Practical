@@ -55,7 +55,7 @@ class Book {
       WHERE book_id = @id
       `;
 
-      // console.log(newAvailabilityData[0].availability);
+      console.log(newAvailabilityData[0].availability);
       const request = connection.request();
       request.input("id", id);
       request.input("availability", newAvailabilityData[0].availability);

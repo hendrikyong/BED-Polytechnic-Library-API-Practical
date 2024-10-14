@@ -47,7 +47,7 @@ class Book {
     }
   }
 
-  static async updateBook(id, newAvailabilityData) {
+  static async updateBook(id, newAvailability) {
     try {
       const connection = await sql.connect(dbConfig);
       const sqlQuery = `UPDATE Books SET
@@ -55,10 +55,10 @@ class Book {
       WHERE book_id = @id
       `;
 
-      console.log(newAvailabilityData[0].availability);
+      console.log(newAvailability);
       const request = connection.request();
       request.input("id", id);
-      request.input("availability", newAvailabilityData[0].availability);
+      request.input("availability", newAvailability);
 
       await request.query(sqlQuery);
       connection.close();

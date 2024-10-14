@@ -27,7 +27,7 @@ const getBookById = async (req, res) => {
 const updateBook = async (req, res) => {
   const bookId = parseInt(req.params.id);
   console.log(bookId);
-  const newAvailability = req.body;
+  const newAvailability = req.body.newAvailability;
   console.log(newAvailability);
 
   try {

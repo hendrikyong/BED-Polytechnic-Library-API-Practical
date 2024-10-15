@@ -8,7 +8,7 @@ const doc = {
     title: "My API",
     description: "Description of your API",
   },
-  host: "localhost:3000", // Replace with your actual host if needed
+  host: "localhost:8080", // Replace with your actual host if needed
 };
 
 swaggerAutogen(outputFile, routes, doc);

@@ -3,6 +3,7 @@ const dbConfig = require("../dbConfig");
 
 class Book {
   constructor(book_id, title, author, availability) {
+    //variables
     (this.book_id = book_id),
       (this.title = title),
       (this.author = author),
@@ -17,6 +18,7 @@ class Book {
       const result = await request.query(sqlQuery);
       connection.close();
 
+      //iterate each row and return
       return result.recordset.map(
         (row) => new Book(row.book_id, row.title, row.author, row.availability)
       );
@@ -34,6 +36,7 @@ class Book {
       const result = await request.query(sqlQuery);
       connection.close();
 
+      //verifies whether there is at least one record in the recordset array returned from the database query using ternary operator if not found return null
       return result.recordset[0]
         ? new Book(
             result.recordset[0].book_id,
@@ -55,8 +58,10 @@ class Book {
       WHERE book_id = @id
       `;
 
-      console.log(newAvailability);
+      // console.log(newAvailability);
+      //establish connection request
       const request = connection.request();
+      //input parameters
       request.input("id", id);
       request.input("availability", newAvailability);
 

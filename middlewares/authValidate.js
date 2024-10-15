@@ -13,7 +13,7 @@ function verifyJWT(req, res, next) {
       return res.status(403).json({ message: "Forbidden" });
     }
 
-    // Check user role for authorization (replace with your logic)
+    // Check user role for authorization
     const authorizedRoles = {
       "/books": ["member", "librarian"], // Anyone can view books
       "/books/[0-9]+/availability": ["librarian"], // Only librarians can update availability
@@ -30,7 +30,7 @@ function verifyJWT(req, res, next) {
     );
 
     if (!authorizedRole) {
-      return res.status(403).json({ message: "Forbidden" });
+      return res.status(403).json({ message: "Forbidden Not a Librarian" });
     }
 
     req.user = decoded; // Attach decoded user information to the request object

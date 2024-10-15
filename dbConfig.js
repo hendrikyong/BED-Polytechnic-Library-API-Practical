@@ -6,8 +6,8 @@ const config = {
   server: process.env.DB_SERVER,
   database: process.env.DB_DATABASE,
   options: {
-    encrypt: process.env.TRUSTSERVERCERTIFICATE === "true", // true for Azure connections
-    trustServerCertificate: process.env.TRUSTSERVERCERTIFICATE === "true", // true for local dev/self-signed certs
+    encrypt: process.env.TRUSTSERVERCERTIFICATE === "true",
+    trustServerCertificate: process.env.TRUSTSERVERCERTIFICATE === "true",
     port: parseInt(process.env.DB_PORT) || 1433,
     connectionTimeout: parseInt(process.env.CONNECTIONTIMEOUT) || 60000,
   },

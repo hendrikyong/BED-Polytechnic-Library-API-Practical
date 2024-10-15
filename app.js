@@ -1,33 +1,3 @@
-/*
-- develop new online system to manage book borrowing and user accounts 
-- api needs to be secure 
-    - only authorised users are allowed to access the system
-    - librarians and registered library members
-only library members nad librarians can view books availablility 
-- librarians have access to update a books availability 
-- develop user auth (registration and login) and password encryption
-- JWT tokens
-- secure hashing (bycryptjs) JWT
-- implement auth using roles (members, librarians) to control access to 
-different functionalities 
-- use database mssql to store user information user table and books table 
-- endpoints req 
-    - user reg (POST /register)
-    - login (POST /login)
-    - get all books (GET /books) - accessible by librarians and members
-    - update book availability (PUT /books/:bookId/availability) only librarians
-- basic error handling 
-- Library Members (Students):
-    - Register for an account (POST /register)
-    - Login to access the system (POST /login)
-    - View a list of books and their availability (Y/N) (GET /books)
-- Librarians:
-    - Register for an account (POST /register)
-    - Login to access the system (POST /login)
-    - View a list of books and their availability (Y/N) (GET /books)
-    - Update the availability of books (Y/N) (PUT /books/:bookId/availability)
-*/
-
 const express = require("express");
 const sql = require("mssql");
 const bookController = require("./controllers/booksController");
@@ -44,6 +14,7 @@ const port = 8080;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(staticMiddleware);
+//api documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/books", bookController.getAllBooks);

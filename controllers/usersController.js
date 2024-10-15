@@ -38,10 +38,13 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: "Username already exists" });
     }
 
+    //generate salt
+    //generates a random salt value to ensure that each password hash is unique, even if two users have the same password, combines the plaintext password with the salt and hashes them together to produce a secure hash to be stored in the database
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const connection = await sql.connect(dbConfig);
+    //retrieve the last identity value generated for an identity column after insertion
     const sqlQuery = `INSERT INTO Users (username, passwordHash, role) VALUES (@username, @password, @role)
                       SELECT SCOPE_IDENTITY() as user_id`;
 
@@ -99,6 +102,7 @@ const login = async (req, res) => {
       id: user.id,
       role: user.role,
     };
+    //jwt only valid for 1 hour
     const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
       expiresIn: "3600s",
     }); // Expires in 1 hour

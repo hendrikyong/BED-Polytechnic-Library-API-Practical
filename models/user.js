@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 
 class User {
   constructor(user_id, username, passwordHash, role) {
+    //not storing plain text password for security reasons
     this.user_id = user_id;
     this.username = username;
     this.passwordHash = passwordHash;
